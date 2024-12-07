@@ -16,7 +16,22 @@ const server = http.createServer(async (req, res) =>{
         else {
             filepath = path.join(__dirname, '/public', '/index.html');
         }
-    } 
+    }
+    if (req.method === "POST"){
+        //POST black magic
+        let body = '';
+        req.on('data', chunk => {
+            body += chunk.toString(); // Convert Buffer to string
+        });
+
+        // When all data has been received
+        req.on('end', () => {
+            console.log(body);
+        })
+
+        //defaulting to the question path
+        filepath = path.join(__dirname, '/public', '/question.html');
+    }
     
     const data = await fs.readFile(filepath);
     res.setHeader('Content-Type', 'text/html');
