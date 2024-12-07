@@ -2,7 +2,12 @@ import http from 'http';
 import fs from 'fs/promises'
 import url from 'url'
 import path from 'path'
+import SSE from 'sse'
 const port = 8000;
+
+let bodyText
+
+//might rewrite API from vanilla nodejs to Express.js
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,7 +31,12 @@ const server = http.createServer(async (req, res) =>{
 
         // When all data has been received
         req.on('end', () => {
-            console.log(body);
+            //body formatting
+            //TODO! split intro multiple functions + change %3F into ?
+            bodyText = String(body).replaceAll('+', ' ').replace('question=', '');
+            console.log(bodyText);
+
+            //TODO! implement SSE
         })
 
         //defaulting to the question path
