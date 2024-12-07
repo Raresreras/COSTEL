@@ -1,0 +1,16 @@
+{
+  "name": "costel",
+  "version": "1.0.0",
+  "description": "Node.js app",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "path": "^0.12.7",
+    "stream": "^0.0.3"
+  }
+}
