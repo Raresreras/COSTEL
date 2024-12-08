@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>COSTEL</title>
+</head>
+<div style="width:100%; height:500px; background-color:powderblue">
+    <h1>WebSocket Client</h1>
+    <button id="connect">Connect</button>
+    <button id="send">Send Message</button>
+    <div id="messages"></div>
+
+    <script>
+        let socket;
+
+        document.getElementById('connect').addEventListener('click', () => {
+            // Establish WebSocket connection
+            socket = new WebSocket('ws://localhost:8000');
+
+            // Handle open event
+            socket.addEventListener('open', () => {
+                console.log('Connected to WebSocket server');
+                document.getElementById('messages').innerHTML += '<p>Connected to server</p>';
+            });
+
+            // Handle message event
+            socket.addEventListener('message', (event) => {
+                console.log('Message from server:', event.data);
+                document.getElementById('messages').innerHTML += `<p>Server: ${event.data}</p>`;
+            });
+
+            // Handle close event
+            socket.addEventListener('close', () => {
+                console.log('WebSocket connection closed');
+                document.getElementById('messages').innerHTML += '<p>Connection closed</p>';
+            });
+        });
+
+        document.getElementById('send').addEventListener('click', () => {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                const message = 'Hello Server!';
+                console.log('Sending:', message);
+                socket.send(message);
+            } else {
+                console.log('WebSocket is not connected');
+            }
+        });
+    </script>
+</div>
+</html>
