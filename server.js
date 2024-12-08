@@ -6,8 +6,6 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended : false}));
 app.use(express.json())
 
-//WEBSOCKET
-
 import http from 'http';
 import { WebSocketServer } from 'ws';
 
@@ -16,9 +14,17 @@ const wss = new WebSocketServer({ server });
 
 wss.on('connection', (ws) =>{
     console.log("NEW CLIENT CONNECTED");
-});
 
-//IMPLEMENTATION
+    ws.on('message', (message) =>{
+        console.log('received: ' + message);
+
+        wss.clients.forEach((client) => {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(message);
+            }
+        });
+    });
+});
 
 app.get('/', (req, res) => {
     res.status(200);

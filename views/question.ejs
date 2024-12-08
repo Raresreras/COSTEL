@@ -5,9 +5,27 @@
 </head>
 <div style="width:100%; height:500px; background-color:lightgray">
     <h1>Insert question</h1>
-    <form id="question_form" method="POST">
-        <input type="text" name="question" required>
-        <input type="submit">
-    </form>
+    <input type="text" id="questionInput">
+    <button onclick="sendData()">Send</button>
+    <script>
+        let socket = new WebSocket('ws://localhost:8000');
+        // Handle open event
+        socket.addEventListener('open', () => {
+            console.log('Connected to WebSocket server');
+        });
+        // Handle message event
+        socket.addEventListener('message', (event) => {
+            console.log('Message from server:', event.data);
+        });
+        // Handle close event
+        socket.addEventListener('close', () => {
+            console.log('WebSocket connection closed');
+        });
+
+        function sendData(){
+            socket.send(JSON.stringify('test'));
+            console.log('Sent: ' + 'test');
+        }
+    </script>
 </div>
 </html>
