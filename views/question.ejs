@@ -23,8 +23,8 @@
         });
 
         function sendData(){
-            socket.send(JSON.stringify('test'));
-            console.log('Sent: ' + 'test');
+            socket.send(JSON.stringify(document.getElementById("questionInput").value));
+            console.log('Sent: ' + document.getElementById("questionInput").value); 
         }
     </script>
 </div>

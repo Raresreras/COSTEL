@@ -15,8 +15,8 @@
         });
         // Handle message event
         socket.addEventListener('message', (event) => {
-            console.log('Message from server:', event.data);
-            Document.getElementById('question').text = event.data();
+            console.log('Message from server:', JSON.stringify(event.data));
+            document.getElementById('question').innerHTML = event.data;
         });
         // Handle close event
         socket.addEventListener('close', () => {
