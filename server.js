@@ -29,7 +29,7 @@ wss.on('connection', (ws) =>{
 
 app.get('/', (req, res) => {
     res.status(200);
-    res.render('index', {questionText : 'Awaiting question'}); //questionText will be used to display the question
+    res.render('index', {questionText : 'Awaiting question'});
 });
 
 app.get('/question', (req, res) =>{
