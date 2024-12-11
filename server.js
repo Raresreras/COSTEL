@@ -37,11 +37,25 @@ app.get('/question', (req, res) =>{
     res.render('question');
 });
 
-app.post('/question', async (req, res) =>{
-    console.log(req.body);
-    res.redirect('question');
+app.get('/red', (req, res) => {
+    res.status(200);
+    res.render('red');
 });
 
+app.get('/blue', (req, res) => {
+    res.status(200);
+    res.render('blue');
+});
+
+app.get('/yellow', (req, res) => {
+    res.status(200);
+    res.render('yellow');
+});
+
+app.get('/green', (req, res) => {
+    res.status(200);
+    res.render('green');
+});
 
 server.listen(port);
 console.log('Server running on port ' + port);

@@ -31,7 +31,7 @@
                 <h1 class="text-white">Intrebare</h1>
             </div>
             <div class="card-body bg-dark">
-                <h1 class="text-white" id="question">Awaiting question</h1>
+
             </div>
         </div>
         <div class="card m-4">
@@ -42,17 +42,8 @@
                 <div class="square" id="green" style="background-color: green;"></div>
             </div>
             <div class="card-body">
-                <div class="form-inline">
-                    <label for="questionInput">Red</label>
-                    <input type="text" id="redInput">
-                    <label for="questionInput">Blue</label>
-                    <input type="text" id="blueInput">
-                    <label for="questionInput">Yellow</label>
-                    <input type="text" id="yellowInput">
-                    <label for="questionInput">Green</label>
-                    <input type="text" id="greenInput">
-                </div>
-                <button class="btn btn-primary m-2" onclick="get_input_data()">Set controls</button>
+                <h6 class="text">Log data</h6>
+                <h6 class="text" id="question">Awaiting question</h6>
             </div>
         </div>
     </div>
@@ -70,35 +61,6 @@
             // Handle close event
             socket.addEventListener('close', () => {
                 console.log('WebSocket connection closed');
-            });
-
-            //input handling
-
-            let redInp = '';
-            let blueInp = '';
-            let yellowInp = '';
-            let greenInp = '';
-
-            function get_input_data(){
-                redInp = document.getElementById('redInput').value;
-                blueInp = document.getElementById('blueInput').value;
-                yellowInp = document.getElementById('yellowInput').value;
-                greenInp = document.getElementById('greenInput').value;
-                console.log(redInp);
-                console.log(blueInp);
-                console.log(yellowInp);
-                console.log(greenInp);
-            }
-
-            //keyboard
-            document.addEventListener('keydown', (key) =>{
-                console.log(key.code);
-            });
-            //controller
-            let controllerIndex;
-            document.addEventListener('gamepadconnected', (event) => {
-                controllerIndex = event.gamepad.index();
-                console.log('controller');
             });
         </script>
     </div>
