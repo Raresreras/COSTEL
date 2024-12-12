@@ -10,8 +10,8 @@
 
     <style>
         .square {
-            height: 200px;
-            width: 20%;
+            height: 400px;
+            width: 80%;
             background-color: #555;
             margin: 10px;
         }
@@ -36,10 +36,7 @@
         </div>
         <div class="card m-4">
             <div class="card-body" style="display: flex; justify-content: center;">
-                <div class="square" id="red" style="background-color: red;"></div>
-                <div class="square" id="blue" style="background-color: blue;"></div>
-                <div class="square" id="yellow" style="background-color: yellow;"></div>
-                <div class="square" id="green" style="background-color: green;"></div>
+                <div class="square" id="question_square" style="background-color: coral;"></div>
             </div>
             <div class="card-body">
                 <h6 class="text">Log data</h6>
@@ -48,15 +45,25 @@
         </div>
     </div>
         <script>
+            async function sleep(ms) {
+                await new Promise((resolve) => setTimeout(resolve, ms));
+            }
+
             let socket = new WebSocket('ws://localhost:8000');
             // Handle open event
             socket.addEventListener('open', () => {
                 console.log('Connected to WebSocket server');
             });
             // Handle message event
-            socket.addEventListener('message', (event) => {
+            socket.addEventListener('message', async (event) => {
                 console.log('Message from server:', JSON.stringify(event.data));
                 document.getElementById('question').innerHTML = event.data;
+
+                // Changing square color and stopping communcation for 5 seconds
+                if (document.getElementById('question_square').style.backgroundColor == 'coral')
+                    document.getElementById('question_square').style.backgroundColor = event.data;
+                    await sleep(5000);
+                    document.getElementById('question_square').style.backgroundColor = 'coral';
             });
             // Handle close event
             socket.addEventListener('close', () => {
